@@ -2,11 +2,13 @@
   "name": "index",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "./run.sh"
   },
   "dependencies": {
     "meteor-node-stubs": "~0.2.0",
     "react": "^15.2.1",
-    "react-dom": "^15.2.1"
+    "react-addons-pure-render-mixin": "^15.2.1",
+    "react-dom": "^15.2.1",
+    "react-mounter": "^1.2.0"
   }
 }
