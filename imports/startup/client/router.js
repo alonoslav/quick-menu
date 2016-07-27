@@ -7,9 +7,8 @@ import { FlowRouter } from 'meteor/kadira:flow-router'
 import BlankLayout from '/imports/ui/layouts/BlankLayout';
 import MainLayout from '/imports/ui/layouts/MainLayout';
 
-import Dashboard from '/imports/ui/components/Dashboard';
-
 import LoginContainer from '/imports/ui/conteiners/LoginContainer';
+import DashboardContainer from '/imports/ui/conteiners/DashboardContainer';
 
 const requireLogin = function () {
   if (!Meteor.loggingIn()) {
@@ -24,7 +23,7 @@ FlowRouter.route('/', {
   triggersEnter: [requireLogin],
   name: 'dashboard',
   action() {
-    mount(BlankLayout, {content: <Dashboard />});
+    mount(BlankLayout, {content: <DashboardContainer />});
   }
 });
 

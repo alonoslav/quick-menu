@@ -19,19 +19,7 @@ if (Organization.find().count() === 0) {
   const ownerId = Accounts.createUser({
     username: 'test owner',
     email: 'test.owner@mail.com',
-    password: 'qweqweqwe'
-  });
-
-  Accounts.createUser({
-    username: 'test waiter',
-    email: 'test.waiter@mail.com',
-    password: 'qweqweqwe'
-  });
-
-  Accounts.createUser({
-    username: 'test customer',
-    email: 'test.customer@mail.com',
-    password: 'qweqweqwe'
+    password: 'qweqweqwe',
   });
 
   const organizationId = Organization.insert({
@@ -40,10 +28,19 @@ if (Organization.find().count() === 0) {
     logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/32/Pakistan_Tobacco_Company_logo.svg/1280px-Pakistan_Tobacco_Company_logo.svg.png'
   });
 
+  Accounts.createUser({
+    username: 'test waiter',
+    email: 'test.waiter@mail.com',
+    password: 'qweqweqwe',
+  });
 
+  Accounts.createUser({
+    username: 'test customer',
+    email: 'test.customer@mail.com',
+    password: 'qweqweqwe'
+  });
 
-
-
+  Meteor.users.update({}, {$set: {organizationId}}, {multi: true});
 
   ['1', '2', '3'].forEach(name => {
     return Table.insert({
@@ -77,7 +74,7 @@ if (Organization.find().count() === 0) {
   const photo = 'http://lorempixel.com/1024/768/food';
   const name = 'Lorem ipsum';
 
-  for (let i=0; i<9; i++) {
+  for (let i = 0; i < 9; i++) {
     const categoryId = Random.choice(categoryIds);
 
     Menu.insert({
