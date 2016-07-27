@@ -1,9 +1,25 @@
 import React from 'react';
 
+import { Session } from 'meteor/session';
+
 export default class MenuItem extends React.Component {
   formatPrice(price) {
     return price.toFixed(2);
   }
+
+  addToCart(event) {
+    event.preventDefault();
+// todo: add reactivity for menu counter
+    const cartItems = Session.get('cart');
+    cartItems.push(this.props.menuItem._id);
+    Session.set('cart', cartItems);
+  }
+
+  isInCart() {
+    const cartItems = Session.get('cart');
+    return cartItems.indexOf(this.props.menuItem._id) > -1;
+  }
+
 
   render() {
     const priceStyle = {
@@ -25,9 +41,14 @@ export default class MenuItem extends React.Component {
               <span style={priceStyle}>
                 {this.formatPrice(this.props.menuItem.price)} грн.
               </span>
-              <a href="#" className="waves-effect waves-light btn orange right">
-                <i className="material-icons left">shopping_cart</i>
+              <a href="#"
+                 className="waves-effect waves-light btn orange right"
+                 onClick={this.addToCart.bind(this)}>
+                <i className="material-icons left">
+                  {this.isInCart() ? 'done' : 'shopping_cart'}
+                </i>
                 В кошик
+                {this.isInCart() ? 'у' : ''}
               </a>
             </p>
           </div>

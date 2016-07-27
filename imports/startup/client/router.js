@@ -23,7 +23,10 @@ FlowRouter.route('/', {
   triggersEnter: [requireLogin],
   name: 'dashboard',
   action() {
-    mount(BlankLayout, {content: <DashboardContainer />});
+    mount(MainLayout, {
+      content: <DashboardContainer />,
+      title: 'Меню'
+    });
   }
 });
 
