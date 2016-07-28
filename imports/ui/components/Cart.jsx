@@ -3,21 +3,34 @@ import React from 'react';
 import CartItemContainer from '../conteiners/CartItemContainer';
 
 export default class Cart extends React.Component {
+  cartEmpty() {
+    const { cartItems } = this.props;
+    return cartItems.length === 0;
+  }
+
   getCartItems() {
     const { cartItems } = this.props;
     return cartItems.map(cartItem => <CartItemContainer key={cartItem._id}
-                                               cartItem={cartItem}/>);
+                                                        cartItem={cartItem}/>);
   }
 
   render() {
     return (
-      <div>
-        <ul className="collection">
-          {this.props.ready ? this.getCartItems() : 'loading...'}
-        </ul>
-        <div>
-          <h2 className="right-align">{this.props.total} грн.</h2>
-        </div>
+      <div className="center-align">
+        {this.cartEmpty() ? <h3 className="center-align">Ваш кошик порожній</h3> :
+          <div>
+            <ul className="collection">
+              {this.props.ready ? this.getCartItems() : 'Loading...'}
+            </ul>
+            <div>
+              <p className="flow-text">
+                Загалом: <b>{this.props.total} грн.</b>
+              </p>
+
+              <button className="btn orange waves-effect waves-light btn-large">Замовити</button>
+            </div>
+          </div>
+        }
       </div>
     );
   }

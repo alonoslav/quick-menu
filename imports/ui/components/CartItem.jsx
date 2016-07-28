@@ -17,6 +17,14 @@ export default class CartItem extends React.Component {
     Session.set('cart', cartItems);
   }
 
+  removeItem(event) {
+    event.preventDefault();
+
+    const cartItems = Session.get('cart');
+    delete cartItems[this.props.cartItem._id];
+    Session.set('cart', cartItems);
+  }
+
   render() {
     const itemStyle = {
       minHeight: 'inherit'
@@ -26,6 +34,12 @@ export default class CartItem extends React.Component {
       marginTop: 0
     };
 
+    const deleteButtonStyle = {
+      marginTop: '-15px',
+      marginLeft: '15px',
+      paddingTop: '17px',
+    };
+
     return (
       <li className="collection-item avatar" style={itemStyle}>
         <img src={this.props.cartItem.photo} alt="" className="circle" />
@@ -33,14 +47,19 @@ export default class CartItem extends React.Component {
           <p>
             {this.getPrice()} грн.
           </p>
-          <a href="#!" className="secondary-content">
-            <div className="input-field" style={inputFieldStyle}>
+          <div className="secondary-content">
+            <div className="input-field left" style={inputFieldStyle}>
               <input type="number"
                      value={this.props.count}
                      min="1"
                      onChange={this.onChange.bind(this)} />
             </div>
-          </a>
+
+            <a href="#"
+               style={deleteButtonStyle}
+               onClick={this.removeItem.bind(this)}
+               className="material-icons red-text waves-effect waves-effect waves-red waves-circle">delete</a>
+          </div>
       </li>
     );
   }

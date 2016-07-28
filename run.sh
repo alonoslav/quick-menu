@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-meteor run --settings settings.json
+meteor run -p 3333 --settings settings.json
