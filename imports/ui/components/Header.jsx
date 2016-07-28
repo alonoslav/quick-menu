@@ -1,30 +1,26 @@
 import React from 'react';
+import classNames from 'classnames';
 
-import { Session } from 'meteor/session';
+import { _ } from 'meteor/underscore';
 
 export default class Header extends React.Component {
-  componentWillMount() {
-    const cartItems = Session.get('cart');
+  itemsInCartPrice() {
+    if (this.props.ready) {
+      const { cartItems } = this.props;
+      const price = _.reduce(cartItems, (memo, menuItem) => {
+        return memo + menuItem.price;
+      }, 0);
 
-    if (!cartItems) {
-      Session.set('cart', []);
+      return price.toFixed(2);
     }
-  }
 
-  itemsInCartCount() {
-    return Session.get('cart').length;
+    return 0;
   }
 
   render() {
-    const cartStyle = {
-      display: 'inline-block'
-    };
-
-    const itemsCountStyle = {
-      padding: '2px 6px',
-      borderRadius: '5px',
-      marginLeft: '-10px'
-    };
+    const cartClass = classNames({
+      orange: this.props.cartItems.length
+    });
 
     return (
       <div className="navbar-fixed">
@@ -35,12 +31,14 @@ export default class Header extends React.Component {
             </a>
 
             <ul id="nav-mobile" className="right">
-              <li>
+              <li className="hide-on-small-only">
+                <a href="#" className="flow-text">
+                  {this.itemsInCartPrice()} грн.
+                </a>
+              </li>
+              <li className={cartClass}>
                 <a href="collapsible.html">
-                  <span className="orange" style={itemsCountStyle}>
-                    {this.itemsInCartCount()}
-                  </span>
-                  <i className="material-icons" style={cartStyle}>shopping_cart</i>
+                  <i className="material-icons">shopping_cart</i>
                 </a>
               </li>
             </ul>
