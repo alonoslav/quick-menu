@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 import { Session } from 'meteor/session';
 
@@ -9,14 +10,14 @@ export default class MenuItem extends React.Component {
 
   addToCart(event) {
     event.preventDefault();
-// todo: add reactivity for menu counter
-    const cartItems = Session.get('cart');
+
+    const cartItems = this.props.cartItems;
     cartItems.push(this.props.menuItem._id);
     Session.set('cart', cartItems);
   }
 
   isInCart() {
-    const cartItems = Session.get('cart');
+    const cartItems = this.props.cartItems;
     return cartItems.indexOf(this.props.menuItem._id) > -1;
   }
 
@@ -25,6 +26,11 @@ export default class MenuItem extends React.Component {
     const priceStyle = {
       fontSize: '20px'
     };
+
+    const toCartButtonClass = classNames('btn', 'orange', 'right',
+      'waves-effect', 'waves-light', {
+        disabled: this.isInCart()
+      });
 
     return (
       <div className="col s12 m6 l4">
@@ -42,7 +48,7 @@ export default class MenuItem extends React.Component {
                 {this.formatPrice(this.props.menuItem.price)} грн.
               </span>
               <a href="#"
-                 className="waves-effect waves-light btn orange right"
+                 className={toCartButtonClass}
                  onClick={this.addToCart.bind(this)}>
                 <i className="material-icons left">
                   {this.isInCart() ? 'done' : 'shopping_cart'}

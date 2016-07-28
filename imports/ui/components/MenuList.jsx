@@ -6,7 +6,10 @@ export default class MenuList extends React.Component {
   getMenuList() {
     const { menuList } = this.props;
     if (menuList.length) {
-      return menuList.map(menuItem => <MenuItem key={menuItem._id} menuItem={menuItem}/>);
+      return menuList.map(menuItem => <MenuItem key={menuItem._id}
+                                                menuItem={menuItem}
+                                                cartItems={this.props.cartItems}
+      />);
     }
 
     return <h2>No items</h2>;
