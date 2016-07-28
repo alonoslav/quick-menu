@@ -11,14 +11,17 @@ export default class MenuItem extends React.Component {
   addToCart(event) {
     event.preventDefault();
 
+    const id = this.props.menuItem._id;
     const cartItems = this.props.cartItems;
-    cartItems.push(this.props.menuItem._id);
+
+    cartItems[id] = 1;
+
     Session.set('cart', cartItems);
   }
 
   isInCart() {
     const cartItems = this.props.cartItems;
-    return cartItems.indexOf(this.props.menuItem._id) > -1;
+    return cartItems[this.props.menuItem._id];
   }
 
 

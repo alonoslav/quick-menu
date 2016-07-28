@@ -9,6 +9,7 @@ import MainLayout from '/imports/ui/layouts/MainLayout';
 
 import LoginContainer from '/imports/ui/conteiners/LoginContainer';
 import DashboardContainer from '/imports/ui/conteiners/DashboardContainer';
+import CartContainer from '/imports/ui/conteiners/CartContainer';
 
 const requireLogin = function () {
   if (!Meteor.loggingIn()) {
@@ -36,3 +37,13 @@ FlowRouter.route('/sign-in', {
     mount(BlankLayout, {content: <LoginContainer />});
   }
 });
+
+FlowRouter.route('/cart', {
+  name: 'cart',
+  action() {
+    mount(MainLayout, {
+      content: <CartContainer />,
+      title: 'Кошик',
+    });
+  }
+})
