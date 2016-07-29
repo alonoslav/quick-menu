@@ -16,18 +16,18 @@ export default class Cart extends React.Component {
 
   render() {
     return (
-      <div className="center-align">
+      <div>
         {this.cartEmpty() ? <h3 className="center-align">Ваш кошик порожній</h3> :
           <div>
             <ul className="collection">
               {this.props.ready ? this.getCartItems() : 'Loading...'}
             </ul>
-            <div>
+            <div className="center-align">
               <p className="flow-text">
                 Загалом: <b>{this.props.total} грн.</b>
               </p>
 
-              <button className="btn orange waves-effect waves-light btn-large">Замовити</button>
+              <button className="btn orange waves-effect waves-light">Замовити</button>
             </div>
           </div>
         }

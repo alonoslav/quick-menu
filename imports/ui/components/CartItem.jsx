@@ -34,12 +34,6 @@ export default class CartItem extends React.Component {
       marginTop: 0
     };
 
-    const deleteButtonStyle = {
-      marginTop: '-15px',
-      marginLeft: '15px',
-      paddingTop: '17px',
-    };
-
     return (
       <li className="collection-item avatar" style={itemStyle}>
         <img src={this.props.cartItem.photo} alt="" className="circle" />
@@ -56,9 +50,8 @@ export default class CartItem extends React.Component {
             </div>
 
             <a href="#"
-               style={deleteButtonStyle}
                onClick={this.removeItem.bind(this)}
-               className="material-icons red-text waves-effect waves-effect waves-red waves-circle">delete</a>
+               className="material-icons red-text waves-effect waves-circle-auto-size waves-red waves-circle">delete</a>
           </div>
       </li>
     );

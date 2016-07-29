@@ -35,6 +35,8 @@ export default class MenuItem extends React.Component {
         disabled: this.isInCart()
       });
 
+    const iconsClass = "material-icons right waves-effect waves-circle waves-circle-auto-size";
+
     return (
       <div className="col s12 m6 l4">
         <div className="card">
@@ -44,7 +46,7 @@ export default class MenuItem extends React.Component {
           <div className="card-content">
             <span className="card-title activator grey-text text-darken-4">
               {this.props.menuItem.name}
-              <i className="material-icons right">more_vert</i>
+              <i className={iconsClass}>more_vert</i>
             </span>
             <p>
               <span style={priceStyle}>
@@ -64,7 +66,7 @@ export default class MenuItem extends React.Component {
           <div className="card-reveal">
             <span className="card-title grey-text text-darken-4">
               {this.props.menuItem.name}
-              <i className="material-icons right">close</i>
+              <i className={iconsClass}>close</i>
             </span>
             <p>
               {this.props.menuItem.description}
