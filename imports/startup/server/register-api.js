@@ -1,2 +1,5 @@
 import '/imports/api/menu/publications';
 import '/imports/api/table/publications';
+
+import '/imports/api/order/methods';
+import '/imports/api/order/publications';

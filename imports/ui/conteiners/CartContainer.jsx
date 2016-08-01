@@ -15,7 +15,10 @@ export default createContainer(() => {
   const ids = _.keys(cartItems);
 
   const subscription = Meteor.subscribe('menu.byIds', ids);
-  const menuItems = Menu.find({ _id: { $in: ids } }).fetch();
+  const menuItems = Menu.find({ _id: { $in: ids } }).map(item => {
+    item.count = cartItems[item._id];
+    return item;
+  });
 
   const total = _.reduce(menuItems, (memo, menuItem) => {
     return memo + menuItem.price * cartItems[menuItem._id];

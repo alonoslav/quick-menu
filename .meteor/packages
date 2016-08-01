@@ -26,3 +26,4 @@ kadira:flow-router
 materialize:materialize
 underscore
 fourseven:scss
+momentjs:moment

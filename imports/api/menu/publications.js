@@ -7,5 +7,7 @@ Meteor.publish('menu.all', function () {
 });
 
 Meteor.publish('menu.byIds', function (ids) {
+  ids = _.isArray(ids) ? ids : [ids];
+
   return Menu.find({ _id: { $in: ids } });
 });

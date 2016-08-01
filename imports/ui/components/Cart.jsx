@@ -1,6 +1,13 @@
 import React from 'react';
 
+import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/underscore';
+
+import { FlowRouter } from 'meteor/kadira:flow-router';
+
 import CartItemContainer from '../conteiners/CartItemContainer';
+import CommonAlerts from '../../utils/CommonAlerts';
+import Misc from '../../utils/Misc';
 
 export default class Cart extends React.Component {
   cartEmpty() {
@@ -12,6 +19,26 @@ export default class Cart extends React.Component {
     const { cartItems } = this.props;
     return cartItems.map(cartItem => <CartItemContainer key={cartItem._id}
                                                         cartItem={cartItem}/>);
+  }
+
+  saveOrder(event) {
+    event.preventDefault();
+
+    const cartItems = _.map(this.props.cartItems, item => {
+      return _.pick(item, ['_id', 'count', 'price']);
+    });
+
+    if (cartItems.length === 0) {
+      return CommonAlerts.error('Ваше замовлення порожнє!')
+    }
+
+    const table = localStorage.getItem('table');
+
+    Meteor.call('order.create', cartItems, table, Misc.handleMethodResult(() => {
+      Session.set('cart', null);
+      CommonAlerts.success('Ваше замовлення прийняте. Очікуйте підтвердження.');
+      return FlowRouter.go('/menu-list');
+    }));
   }
 
   render() {
@@ -27,7 +54,10 @@ export default class Cart extends React.Component {
                 Загалом: <b>{this.props.total} грн.</b>
               </p>
 
-              <button className="btn orange waves-effect waves-light">Замовити</button>
+              <button className="btn orange waves-effect waves-light"
+                      onClick={this.saveOrder.bind(this)}>
+                Замовити
+              </button>
             </div>
           </div>
         }

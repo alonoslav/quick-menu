@@ -5,15 +5,6 @@ import { _ } from 'meteor/underscore';
 
 export default class WaitersHeader extends React.Component {
   render() {
-    const priceClass = classNames({
-      'hide-on-small-only': true,
-      orange: this.props.cartItems.length
-    });
-
-    const cartClass = classNames({
-      orange: this.props.cartItems.length
-    });
-
     return (
       <div className="navbar-fixed">
         <nav className="red lighten-1">
@@ -23,7 +14,7 @@ export default class WaitersHeader extends React.Component {
             </a>
 
             <ul id="nav-mobile" className="right">
-              <li className={priceClass}>
+              <li>
                 <a href="/cart" className="flow-text">
 
                 </a>

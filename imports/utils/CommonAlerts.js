@@ -22,4 +22,8 @@ export default class CommonAlerts {
       return toast('');
     }
   }
+
+  static success(text) {
+    return Materialize.toast(text, 3000, 'green lighten-1');
+  }
 }

@@ -22,7 +22,6 @@ const requireLogin = function () {
   }
 };
 
-
 FlowRouter.route('/', {
   triggersEnter: [requireLogin],
   name: 'dashboard',

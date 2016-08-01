@@ -12,7 +12,7 @@ export default createContainer(() => {
   const orders = Order.find().fetch();
 
   return {
+    orders,
     ready: subscription.ready(),
-    cartItems: orders,
   };
 }, WaitersHeader);
