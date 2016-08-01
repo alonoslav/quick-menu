@@ -13,9 +13,12 @@ export default createContainer(() => {
 
   const user = Meteor.user();
 
+  const tableChosen = localStorage.getItem('table');
+
   return {
     user,
     menuList,
+    tableChosen,
     ready: subscription.ready(),
     cartItems: Session.get('cart'),
   };

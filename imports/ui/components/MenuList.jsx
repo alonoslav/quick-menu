@@ -1,6 +1,7 @@
 import React from 'react';
 
 import MenuItem from './MenuItem';
+import TableChooserContainer from '../conteiners/TableChooserContainer';
 
 export default class MenuList extends React.Component {
   getMenuList() {
@@ -18,6 +19,8 @@ export default class MenuList extends React.Component {
   render() {
     return (
       <div className="row">
+        {this.props.tableChosen ? '' : <TableChooserContainer />}
+
         {this.props.ready ? this.getMenuList() : 'loading...'}
       </div>
     );
