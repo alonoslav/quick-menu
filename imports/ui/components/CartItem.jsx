@@ -8,6 +8,13 @@ export default class CartItem extends React.Component {
     return price.toFixed(2);
   }
 
+  getSummary() {
+    const { price } = this.props.cartItem;
+    const summary = price * this.props.count;
+
+    return summary.toFixed(2);
+  }
+
   onChange(event) {
     const count = parseInt(event.target.value);
 
@@ -39,7 +46,7 @@ export default class CartItem extends React.Component {
         <img src={this.props.cartItem.photo} alt="" className="circle" />
           <span className="title">{this.props.cartItem.name}</span>
           <p>
-            {this.getPrice()} грн.
+            {this.getSummary()}грн.
           </p>
           <div className="secondary-content">
             <div className="input-field left" style={inputFieldStyle}>

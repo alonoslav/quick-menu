@@ -46,4 +46,21 @@ FlowRouter.route('/cart', {
       title: 'Кошик',
     });
   }
-})
+});
+
+// hidden routes
+FlowRouter.route('/logout', {
+  name: 'logout',
+  action() {
+    Meteor.logout();
+    FlowRouter.go('signIn');
+  },
+});
+
+FlowRouter.route('/change-table', {
+  name: 'changeTable',
+  action() {
+    localStorage.removeItem('table');
+    FlowRouter.go('dashboard');
+  },
+});

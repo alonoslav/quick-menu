@@ -26,19 +26,23 @@ export default class Login extends React.Component {
 
             <div className="row">
               <div className="input-field col s12">
-                <input type="email" ref="email" required="required" />
+                <input type="email" ref="email" required="required"/>
                 <label htmlFor="email">Email</label>
               </div>
             </div>
 
             <div className="row">
               <div className="input-field col s12">
-                <input type="password" ref="password" required="required" />
+                <input type="password" ref="password" required="required"/>
                 <label htmlFor="password">Пароль</label>
               </div>
             </div>
 
-            <button className="btn waves-effect waves-light" type="submit">Увійти</button>
+            <div className="s12">
+              <button className="btn waves-effect waves-light orange btn-block" type="submit">
+                Увійти
+              </button>
+            </div>
           </form>
         </div>
       </div>

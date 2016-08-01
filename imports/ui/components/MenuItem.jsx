@@ -8,31 +8,35 @@ export default class MenuItem extends React.Component {
     return price.toFixed(2);
   }
 
-  addToCart(event) {
-    event.preventDefault();
-
-    const id = this.props.menuItem._id;
-    const cartItems = this.props.cartItems;
-
-    cartItems[id] = 1;
-
-    Session.set('cart', cartItems);
-  }
-
   isInCart() {
     const cartItems = this.props.cartItems;
     return cartItems[this.props.menuItem._id];
   }
 
+  toggleAddToCart(event) {
+    event.preventDefault();
+
+    const id = this.props.menuItem._id;
+    const cartItems = this.props.cartItems;
+
+    if (this.isInCart()) {
+      delete cartItems[id];
+    } else {
+      cartItems[id] = 1;
+    }
+
+    Session.set('cart', cartItems);
+  }
 
   render() {
     const priceStyle = {
       fontSize: '20px'
     };
 
-    const toCartButtonClass = classNames('btn', 'orange', 'right',
+    const toCartButtonClass = classNames('btn', 'right',
       'waves-effect', 'waves-light', {
-        disabled: this.isInCart()
+        'orange': !this.isInCart(),
+        'grey': this.isInCart()
       });
 
     const iconsClass = "material-icons right waves-effect waves-circle waves-circle-auto-size";
@@ -54,12 +58,11 @@ export default class MenuItem extends React.Component {
               </span>
               <a href="#"
                  className={toCartButtonClass}
-                 onClick={this.addToCart.bind(this)}>
+                 onClick={this.toggleAddToCart.bind(this)}>
                 <i className="material-icons left">
-                  {this.isInCart() ? 'done' : 'shopping_cart'}
+                  {this.isInCart() ? 'delete' : 'shopping_cart'}
                 </i>
-                В кошик
-                {this.isInCart() ? 'у' : ''}
+                {this.isInCart() ? 'Видалити' : 'В кошик'}
               </a>
             </p>
           </div>

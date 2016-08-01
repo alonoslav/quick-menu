@@ -18,6 +18,11 @@ export default class Header extends React.Component {
   }
 
   render() {
+    const priceClass = classNames({
+      'hide-on-small-only': true,
+      orange: this.props.cartItems.length
+    });
+
     const cartClass = classNames({
       orange: this.props.cartItems.length
     });
@@ -31,7 +36,7 @@ export default class Header extends React.Component {
             </a>
 
             <ul id="nav-mobile" className="right">
-              <li className="hide-on-small-only">
+              <li className={priceClass}>
                 <a href="/cart" className="flow-text">
                   {this.itemsInCartPrice()} грн.
                 </a>
