@@ -2,7 +2,7 @@
   "name": "index",
   "private": true,
   "scripts": {
-    "start": "./run.sh"
+    "start": "meteor -p 3333 --settings settings.json"
   },
   "dependencies": {
     "classnames": "^2.2.5",

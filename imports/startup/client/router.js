@@ -6,10 +6,13 @@ import { FlowRouter } from 'meteor/kadira:flow-router'
 
 import BlankLayout from '/imports/ui/layouts/BlankLayout';
 import MainLayout from '/imports/ui/layouts/MainLayout';
+import WaitersLayout from '/imports/ui/layouts/WaitersLayout';
 
 import LoginContainer from '/imports/ui/conteiners/LoginContainer';
 import DashboardContainer from '/imports/ui/conteiners/DashboardContainer';
 import CartContainer from '/imports/ui/conteiners/CartContainer';
+import MenuListContainer from '/imports/ui/conteiners/MenuListContainer';
+import OrdersListContainer from '/imports/ui/conteiners/OrdersListContainer';
 
 const requireLogin = function () {
   if (!Meteor.loggingIn()) {
@@ -29,6 +32,26 @@ FlowRouter.route('/', {
       title: 'Меню'
     });
   }
+});
+
+FlowRouter.route('/menu-list', {
+  name: 'menuList',
+  action() {
+    mount(MainLayout, {
+      content: <MenuListContainer />,
+      title: 'Меню',
+    });
+  },
+});
+
+FlowRouter.route('/orders-list', {
+  name: 'ordersList',
+  action() {
+    mount(WaitersLayout, {
+      content: <OrdersListContainer/>,
+      title: 'Замовлення',
+    });
+  },
 });
 
 FlowRouter.route('/sign-in', {
