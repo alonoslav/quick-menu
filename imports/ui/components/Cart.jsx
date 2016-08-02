@@ -47,7 +47,7 @@ export default class Cart extends React.Component {
         {this.cartEmpty() ? <h3 className="center-align">Ваш кошик порожній</h3> :
           <div>
             <ul className="collection">
-              {this.props.ready ? this.getCartItems() : 'Loading...'}
+              {this.getCartItems()}
             </ul>
             <div className="center-align">
               <p className="flow-text">

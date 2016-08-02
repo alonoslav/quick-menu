@@ -14,7 +14,7 @@ export default createContainer(() => {
 
   const ids = _.keys(cartItems);
 
-  const subscription = Meteor.subscribe('menu.byIds', ids);
+  Meteor.subscribe('menu.byIds', ids);
   const menuItems = Menu.find({ _id: { $in: ids } }).map(item => {
     item.count = cartItems[item._id];
     return item;
@@ -26,7 +26,6 @@ export default createContainer(() => {
 
   return {
     total,
-    ready: subscription.ready(),
     cartItems: menuItems,
   };
 }, Cart);

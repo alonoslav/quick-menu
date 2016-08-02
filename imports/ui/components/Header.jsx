@@ -5,16 +5,13 @@ import { _ } from 'meteor/underscore';
 
 export default class Header extends React.Component {
   itemsInCartPrice() {
-    if (this.props.ready) {
-      const { cartItems } = this.props;
-      const price = _.reduce(cartItems, (memo, menuItem) => {
-        return memo + menuItem.price * menuItem.count;
-      }, 0);
+    const { cartItems } = this.props;
 
-      return price.toFixed(2);
-    }
+    const price = _.reduce(cartItems, (memo, menuItem) => {
+      return memo + menuItem.price * menuItem.count;
+    }, 0);
 
-    return 0;
+    return price.toFixed(2);
   }
 
   render() {

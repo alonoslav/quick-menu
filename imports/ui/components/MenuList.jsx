@@ -21,7 +21,7 @@ export default class MenuList extends React.Component {
       <div className="row">
         {this.props.tableChosen ? '' : <TableChooserContainer />}
 
-        {this.props.ready ? this.getMenuList() : 'loading...'}
+        {this.getMenuList()}
       </div>
     );
   }

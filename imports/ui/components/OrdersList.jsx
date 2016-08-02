@@ -16,7 +16,7 @@ export default class OrdersList extends React.Component {
   render() {
     return (
       <div>
-        {this.props.ready ? this.getOrderItems() : 'Loading...'}
+        {this.getOrderItems()}
       </div>
     );
   }

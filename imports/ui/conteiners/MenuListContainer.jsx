@@ -8,7 +8,7 @@ import MenuList from '../components/MenuList';
 import { Menu } from '/imports/api/menu/menu';
 
 export default createContainer(() => {
-  const subscription = Meteor.subscribe('menu.all');
+  Meteor.subscribe('menu.all');
   const menuList = Menu.find().fetch();
 
   const user = Meteor.user();
@@ -19,7 +19,6 @@ export default createContainer(() => {
     user,
     menuList,
     tableChosen,
-    ready: subscription.ready(),
     cartItems: Session.get('cart'),
   };
 }, MenuList);

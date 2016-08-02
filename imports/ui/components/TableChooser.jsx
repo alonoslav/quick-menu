@@ -1,20 +1,20 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { Table } from '../../api/table/table';
+import { $ } from 'meteor/jquery';
 
 export default class TableChooser extends React.Component {
   componentDidMount() {
-    $('#table-chooser-modal').openModal({
-      dismissible: false,
-    });
-
     setTimeout(() => {
+      $('#table-chooser-modal').openModal({
+        dismissible: false,
+      });
+      
       $('select').material_select();
     }, 500);
   }
 
-  getTabels() {
+  getTables() {
     return this.props.tables.map(table => {
       return (<option key={table._id} value={table._id}>{table.name}</option>);
     });
@@ -41,11 +41,9 @@ export default class TableChooser extends React.Component {
         <div className="modal-content">
           <h4>Виберіть столик</h4>
           <div className="input-field s12">
-            {this.props.ready ?
-              <select>
-                {this.getTabels()}
-              </select> : 'Loading...'
-            }
+            <select>
+              {this.getTables()}
+            </select>
           </div>
         </div>
         <div className="modal-footer">
