@@ -25,7 +25,6 @@ if (Organization.find().count() === 0) {
   const organizationId = Organization.insert({
     name: 'Test org',
     owner: ownerId,
-    logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/3/32/Pakistan_Tobacco_Company_logo.svg/1280px-Pakistan_Tobacco_Company_logo.svg.png'
   });
 
   Accounts.createUser({
@@ -40,7 +39,7 @@ if (Organization.find().count() === 0) {
     password: 'qweqweqwe'
   });
 
-  Meteor.users.update({}, {$set: {organizationId}}, {multi: true});
+  Meteor.users.update({}, { $set: { organizationId } }, { multi: true });
 
   ['1', '2', '3'].forEach(name => {
     return Table.insert({
@@ -51,9 +50,29 @@ if (Organization.find().count() === 0) {
 
   const categoryIds = [];
 
-  ['Закуски', 'Напої', 'Фаст-фуд', 'Кальяни'].forEach((name, order) => {
+  const categories = [{
+    name: 'Закуски',
+    urlName: 'appetizer',
+    icon: 'appetizer.png',
+  }, {
+    name: 'Напої',
+    urlName: 'drinks',
+    icon: 'drinks.png',
+  }, {
+    name: 'Фаст-фуд',
+    urlName: 'fast-food',
+    icon: 'fast-food.png',
+  }, {
+    name: 'Кальяни',
+    urlName: 'hookah',
+    icon: 'hookah.png',
+  }];
+
+  categories.forEach((category, order) => {
     const categoryId = Category.insert({
-      name,
+      name: category.name,
+      urlName: category.urlName,
+      icon: category.icon,
       organizationId,
       order
     });

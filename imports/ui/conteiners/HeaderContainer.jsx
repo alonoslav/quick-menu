@@ -7,6 +7,7 @@ import { _ } from 'meteor/underscore';
 
 import Header from '../components/Header';
 import { Menu } from '/imports/api/menu/menu';
+import { Category } from '/imports/api/category/category';
 
 export default createContainer(() => {
   const cartItems = Session.get('cart') || {};
@@ -17,15 +18,18 @@ export default createContainer(() => {
 
   const ids = _.keys(cartItems);
 
-  const subscription = Meteor.subscribe('menu.byIds', ids);
+  Meteor.subscribe('menu.byIds', ids);
+  Meteor.subscribe('category.byOrganization');
 
   const menuItems = Menu.find({ _id: { $in: ids } }).map(menuItem => {
     menuItem.count = cartItems[menuItem._id] || 0;
     return menuItem;
   });
 
+  const categories = Category.find().fetch();
+
   return {
-    ready: subscription.ready(),
+    categories,
     cartItems: menuItems,
   };
 }, Header);

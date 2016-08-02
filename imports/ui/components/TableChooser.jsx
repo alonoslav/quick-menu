@@ -9,7 +9,7 @@ export default class TableChooser extends React.Component {
       $('#table-chooser-modal').openModal({
         dismissible: false,
       });
-      
+
       $('select').material_select();
     }, 500);
   }

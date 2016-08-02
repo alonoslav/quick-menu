@@ -13,7 +13,7 @@ export default class MenuList extends React.Component {
       />);
     }
 
-    return <h2>No items</h2>;
+    return <h4 className="center-align">Не знайдено нічогісінько...</h4>;
   }
 
   render() {

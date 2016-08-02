@@ -33,7 +33,7 @@ FlowRouter.route('/', {
   }
 });
 
-FlowRouter.route('/menu-list', {
+FlowRouter.route('/menu-list/:category?', {
   name: 'menuList',
   action() {
     mount(MainLayout, {

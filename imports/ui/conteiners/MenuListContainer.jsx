@@ -1,14 +1,20 @@
 import React from 'react';
 
 import { Meteor } from 'meteor/meteor';
-import { createContainer } from 'meteor/react-meteor-data';
+import { _ } from 'meteor/underscore';
 import { Session } from 'meteor/session';
+import { createContainer } from 'meteor/react-meteor-data';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import MenuList from '../components/MenuList';
 import { Menu } from '/imports/api/menu/menu';
+import { Category } from '/imports/api/category/category';
 
 export default createContainer(() => {
-  Meteor.subscribe('menu.all');
+  const categoryName = FlowRouter.getParam('category');
+
+  Meteor.subscribe('menu.all', categoryName);
+
   const menuList = Menu.find().fetch();
 
   const user = Meteor.user();
