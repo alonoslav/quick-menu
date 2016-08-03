@@ -88,11 +88,16 @@ export default class Header extends React.Component {
       orange: this.props.cartItems.length
     });
 
+    const menuToggleStyle = {
+      paddingLeft: '10px',
+    };
+
     return (
       <div className="navbar-fixed">
         <nav className="red lighten-1">
           <div className="nav-wrapper">
-            <a href="#" data-activates="mobile-demo" className="button-collapse">
+            <a href="#" data-activates="mobile-demo" className="button-collapse"
+               style={menuToggleStyle}>
               <i className="material-icons">menu</i>
             </a>
 

@@ -1,21 +1,16 @@
 import { Meteor } from 'meteor/meteor';
+import { _ } from 'meteor/underscore';
 
 import { Menu } from '/imports/api/menu/menu';
-import { Category } from '../category/category';
 
-Meteor.publish('menu.all', function (categoryName) {
+Meteor.publish('menu.all', function (categoryId) {
   const query = {};
 
-  if (categoryName) {
-    const category = Category.findOne({urlName: categoryName});
-    if (category) {
-      query.categoryId = category._id;
-    }
+  if (!_.isNull(categoryId)) {
+    query.categoryId = categoryId;
   }
-  return [
-    Category.find({urlName: categoryName}),
-    Menu.find(query)
-  ];
+
+  return Menu.find(query)
 });
 
 Meteor.publish('menu.byIds', function (ids) {

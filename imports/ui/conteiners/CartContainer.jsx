@@ -25,7 +25,7 @@ export default createContainer(() => {
   }, 0);
 
   return {
-    total,
+    total: total.toFixed(2),
     cartItems: menuItems,
   };
 }, Cart);

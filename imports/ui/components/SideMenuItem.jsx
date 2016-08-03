@@ -5,7 +5,7 @@ export default class SideMenuItem extends React.Component {
   render() {
     const { category } = this.props;
 
-    const link = category.urlName ? `/menu-list/${category.urlName}` : '/menu-list';
+    const link = category.urlName ? `/menu-list/${category._id}` : '/menu-list';
     const imageSrc = `/icons/${category.icon}`;
 
     const imgStyle = {

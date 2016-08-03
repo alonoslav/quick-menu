@@ -3,6 +3,8 @@ import classNames from 'classnames';
 
 import { Session } from 'meteor/session';
 
+import { Category } from '/imports/api/category/category';
+
 export default class MenuItem extends React.Component {
   formatPrice(price) {
     return price.toFixed(2);
@@ -28,6 +30,15 @@ export default class MenuItem extends React.Component {
     Session.set('cart', cartItems);
   }
 
+  getCategoryName() {
+    const category = Category.findOne({ _id: this.props.menuItem.categoryId });
+    return category && category.name;
+  }
+
+  getCategoryUrl() {
+    return `/menu-list/${this.props.menuItem.categoryId}`;
+  }
+
   render() {
     const priceStyle = {
       fontSize: '20px'
@@ -41,6 +52,11 @@ export default class MenuItem extends React.Component {
 
     const iconsClass = "material-icons right waves-effect waves-circle waves-circle-auto-size";
 
+    const badgeStyle = {
+      fontSize: '16px',
+      marginLeft: '10px',
+    };
+
     return (
       <div className="col s12 m6 l4">
         <div className="card">
@@ -50,6 +66,12 @@ export default class MenuItem extends React.Component {
           <div className="card-content">
             <span className="card-title activator grey-text text-darken-4">
               {this.props.menuItem.name}
+              <a href={this.getCategoryUrl()}
+                 className="badge orange-text"
+                 style={badgeStyle}>
+                {this.getCategoryName()}
+                </a>
+
               <i className={iconsClass}>more_vert</i>
             </span>
             <p>

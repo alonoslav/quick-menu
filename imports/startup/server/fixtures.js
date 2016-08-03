@@ -90,10 +90,13 @@ if (Organization.find().count() === 0) {
     Integer tortor nisl, viverra nec ornare id, dignissim hendrerit turpis. Duis porta 
     metus non enim tincidunt molestie. In malesuada mollis elit ac ornare.`;
 
-  const photo = 'http://lorempixel.com/1024/768/food';
-  const name = 'Lorem ipsum';
+  const photo = '/menu/menu.jpeg';
+
+  const names = description.replace(/\n/g, '').replace(/\s\s/g, '').split(' ');
 
   for (let i = 0; i < 9; i++) {
+    const price = parseInt(Math.random() * 10000, 10) / 100;
+    const name = Random.choice(names);
     const categoryId = Random.choice(categoryIds);
 
     Menu.insert({
@@ -102,8 +105,8 @@ if (Organization.find().count() === 0) {
       categoryId,
       description,
       photo,
+      price,
       inTop: false,
-      price: 48
     });
   }
 }
