@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 
 import { _ } from 'meteor/underscore';
 
@@ -15,8 +14,8 @@ export default class WaitersHeader extends React.Component {
 
             <ul id="nav-mobile" className="right">
               <li>
-                <a href="/cart" className="flow-text">
-
+                <a href="/logout">
+                  Logout
                 </a>
               </li>
             </ul>
