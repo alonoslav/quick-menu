@@ -5,7 +5,7 @@ import { _ } from 'meteor/underscore';
 import { $ } from 'meteor/jquery';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-import SideMenuItem from './SideMenuItem';
+import HeaderMobile from './HeaderMobile';
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -19,7 +19,7 @@ export default class Header extends React.Component {
   componentDidMount() {
     setTimeout(() => {
       $('.button-collapse').sideNav({
-        closeOnClick: true,
+        menuWidth: 240,
       });
     }, 500);
   }
@@ -34,30 +34,11 @@ export default class Header extends React.Component {
     return price.toFixed(2);
   }
 
-  getCategories() {
-    let { categories } = this.props;
-
-    const allMenus = {
-      _id: 'all',
-      icon: 'all.png',
-      name: 'Все меню'
-    };
-
-    categories = _.union([allMenus], categories);
-
-    if (categories.length) {
-      return categories.map(category => {
-        const onClick = (categoryName) => {
-          this.setState({ category: categoryName });
-        };
-
-        const active = this.state.category === category.urlName;
-
-        return <SideMenuItem key={category._id} category={category} active={active} onClick={onClick}/>;
-      });
+  onClick() {
+    return categoryId => {
+      this.setState({ category: categoryId });
+      $('.button-collapse').sideNav('hide');
     }
-
-    return <li>&nbsp;</li>;
   }
 
   getTitle() {
@@ -66,7 +47,7 @@ export default class Header extends React.Component {
 
     if (category) {
       this.props.categories.some(categoryOptions => {
-        if (categoryOptions.urlName === category) {
+        if (categoryOptions._id === category) {
           title = categoryOptions.name;
           return true;
         }
@@ -96,7 +77,7 @@ export default class Header extends React.Component {
       <div className="navbar-fixed">
         <nav className="red lighten-1">
           <div className="nav-wrapper">
-            <a href="#" data-activates="mobile-demo" className="button-collapse"
+            <a href="#" data-activates="nav-mobile" className="button-collapse"
                style={menuToggleStyle}>
               <i className="material-icons">menu</i>
             </a>
@@ -105,7 +86,7 @@ export default class Header extends React.Component {
               {this.getTitle()}
             </a>
 
-            <ul id="nav-mobile" className="right">
+            <ul className="right">
               <li className={priceClass}>
                 <a href="/cart" className="flow-text">
                   {this.itemsInCartPrice()} грн.
@@ -118,9 +99,9 @@ export default class Header extends React.Component {
               </li>
             </ul>
 
-            <ul className="side-nav" id="mobile-demo">
-              {this.getCategories()}
-            </ul>
+            <HeaderMobile categories={this.props.categories}
+                          category={this.state.category}
+                          onClick={this.onClick()}/>
           </div>
         </nav>
       </div>

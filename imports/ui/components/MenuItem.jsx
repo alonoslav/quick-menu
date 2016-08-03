@@ -44,7 +44,7 @@ export default class MenuItem extends React.Component {
       fontSize: '20px'
     };
 
-    const toCartButtonClass = classNames('btn', 'right',
+    const toCartButtonClass = classNames('btn', 'right', 'cart-button-icon',
       'waves-effect', 'waves-light', {
         'orange': !this.isInCart(),
         'grey': this.isInCart()
@@ -84,7 +84,6 @@ export default class MenuItem extends React.Component {
                 <i className="material-icons left">
                   {this.isInCart() ? 'delete' : 'shopping_cart'}
                 </i>
-                {this.isInCart() ? 'Видалити' : 'В кошик'}
               </a>
             </p>
           </div>

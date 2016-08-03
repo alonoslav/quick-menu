@@ -8,7 +8,7 @@ export default class MainLayout extends React.Component {
       <div>
         <HeaderContainer title={this.props.title}/>
 
-        <div>
+        <div className="main">
           {this.props.content}
         </div>
       </div>

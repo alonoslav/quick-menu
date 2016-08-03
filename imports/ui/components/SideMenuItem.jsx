@@ -16,15 +16,16 @@ export default class SideMenuItem extends React.Component {
 
     const linkClass = classNames({
       active: this.props.active,
+      bold: true,
     });
 
     const onClick = () => {
-      this.props.onClick(category.urlName)
+      this.props.onClick(category._id)
     };
 
     return (
       <li className={linkClass}>
-        <a href={link} onClick={onClick.bind(this)}>
+        <a href={link} onClick={onClick.bind(this)} className="waves-effect waves-teal">
           <img src={imageSrc} alt={category.name} style={imgStyle}/>
 
           {category.name}
