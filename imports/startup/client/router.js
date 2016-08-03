@@ -7,12 +7,15 @@ import { FlowRouter } from 'meteor/kadira:flow-router'
 import BlankLayout from '/imports/ui/layouts/BlankLayout';
 import MainLayout from '/imports/ui/layouts/MainLayout';
 import WaitersLayout from '/imports/ui/layouts/WaitersLayout';
+import OwnersLayout from '/imports/ui/layouts/OwnersLayout';
 
 import LoginContainer from '/imports/ui/conteiners/LoginContainer';
 import DashboardContainer from '/imports/ui/conteiners/DashboardContainer';
 import CartContainer from '/imports/ui/conteiners/CartContainer';
 import MenuListContainer from '/imports/ui/conteiners/MenuListContainer';
 import OrdersListContainer from '/imports/ui/conteiners/OrdersListContainer';
+
+import Admin from '/imports/ui/components/Admin';
 
 const requireLogin = function () {
   if (!Meteor.loggingIn()) {
@@ -84,5 +87,16 @@ FlowRouter.route('/change-table', {
   action() {
     localStorage.removeItem('table');
     FlowRouter.go('dashboard');
+  },
+});
+
+FlowRouter.route('/admin', {
+  triggersEnter: [requireLogin],
+  name: 'admin',
+  action() {
+    mount(OwnersLayout, {
+      content: <Admin />,
+      title: 'Адмін панель'
+    });
   },
 });
