@@ -15,7 +15,7 @@ export default createContainer(() => {
   } else if (permissionChecker.isWaiter()) {
     FlowRouter.go('ordersList');
   } else if (permissionChecker.isOwner()) {
-    FlowRouter.go('admin');
+    FlowRouter.go('ownerMenuList');
   } else {
     FlowRouter.go('dashboard');
   }

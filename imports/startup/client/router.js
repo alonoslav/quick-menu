@@ -14,8 +14,7 @@ import DashboardContainer from '/imports/ui/conteiners/DashboardContainer';
 import CartContainer from '/imports/ui/conteiners/CartContainer';
 import MenuListContainer from '/imports/ui/conteiners/MenuListContainer';
 import OrdersListContainer from '/imports/ui/conteiners/OrdersListContainer';
-
-import Admin from '/imports/ui/components/Admin';
+import OwnerMenuListContainer from '/imports/ui/conteiners/OwnerMenuListContainer';
 
 const requireLogin = function () {
   if (!Meteor.loggingIn()) {
@@ -90,13 +89,13 @@ FlowRouter.route('/change-table', {
   },
 });
 
-FlowRouter.route('/admin', {
+FlowRouter.route('/owner-menu/:category?', {
   triggersEnter: [requireLogin],
-  name: 'admin',
+  name: 'ownerMenuList',
   action() {
     mount(OwnersLayout, {
-      content: <Admin />,
-      title: 'Адмін панель'
+      content: <OwnerMenuListContainer />,
+      title: 'Керування меню'
     });
   },
 });
