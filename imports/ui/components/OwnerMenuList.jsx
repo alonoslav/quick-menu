@@ -6,7 +6,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import EditCategoryModal from './EditCategoryModal';
 
-import { Category } from '/imports/api/category/category';
+import OwnerMenuItem from './OwnerMenuItem';
 
 export default class OwnerMenuList extends React.Component {
   constructor(props) {
@@ -39,6 +39,15 @@ export default class OwnerMenuList extends React.Component {
     }
   }
 
+  getMenuItems() {
+    const { menus } = this.props;
+    if (menus.length > 0) {
+      return menus.map(menu => <OwnerMenuItem key={menu._id} menuItem={menu}/>);
+    }
+
+    return <h4 className="center-align">Не знайдено нічогісінько...</h4>;
+  }
+
   render() {
     const itemClass = classNames('collection-item', {
       active: this.isActiveCategory(undefined),
@@ -47,7 +56,7 @@ export default class OwnerMenuList extends React.Component {
     return (
       <div>
         <div className="row">
-          <div className="col s12 m4 l4">
+          <div className="col s12 m12 l4">
             <div className="collection">
               <a href='/owner-menu' className={itemClass}>Усі</a>
 
@@ -55,8 +64,8 @@ export default class OwnerMenuList extends React.Component {
             </div>
           </div>
 
-          <div className="col s12 m8 l8">
-            <h3>Items</h3>
+          <div className="col s12 m12 l8">
+            {this.getMenuItems()}
           </div>
         </div>
 

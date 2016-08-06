@@ -10,7 +10,7 @@ Meteor.publish('menu.all', function (categoryId) {
     query.categoryId = categoryId;
   }
 
-  return Menu.find(query)
+  return Menu.find(query);
 });
 
 Meteor.publish('menu.byIds', function (ids) {
