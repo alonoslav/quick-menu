@@ -21,7 +21,8 @@ export default createContainer(() => {
   });
 
   const total = _.reduce(menuItems, (memo, menuItem) => {
-    return memo + menuItem.price * cartItems[menuItem._id];
+    const count = cartItems[menuItem._id] || 0;
+    return memo + menuItem.price * count;
   }, 0);
 
   return {

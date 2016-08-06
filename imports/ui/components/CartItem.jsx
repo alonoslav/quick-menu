@@ -3,14 +3,9 @@ import React from 'react';
 import { Session } from 'meteor/session';
 
 export default class CartItem extends React.Component {
-  getPrice() {
-    const { price } = this.props.cartItem;
-    return price.toFixed(2);
-  }
-
   getSummary() {
     const { price } = this.props.cartItem;
-    const summary = price * this.props.count;
+    const summary = price * (this.props.count || 0);
 
     return summary.toFixed(2);
   }
@@ -43,7 +38,7 @@ export default class CartItem extends React.Component {
 
     return (
       <li className="collection-item avatar" style={itemStyle}>
-        <img src={this.props.cartItem.photo} alt="" className="circle" />
+        <img src={this.props.cartItem.photo} alt="" className="circle hide-on-small-only" />
           <span className="title">{this.props.cartItem.name}</span>
           <p>
             {this.getSummary()}грн.

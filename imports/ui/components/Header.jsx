@@ -63,12 +63,12 @@ export default class Header extends React.Component {
 
   render() {
     const priceClass = classNames({
-      'hide-on-small-only': true,
       orange: this.props.cartItems.length
     });
 
     const cartClass = classNames({
-      orange: this.props.cartItems.length
+      orange: this.props.cartItems.length,
+      'hide-on-small-only': true,
     });
 
     const menuToggleStyle = {
