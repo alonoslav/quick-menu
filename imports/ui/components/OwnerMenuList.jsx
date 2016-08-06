@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import Masonry from 'react-masonry-component';
 
 import { $ } from 'meteor/jquery';
 import { FlowRouter } from 'meteor/kadira:flow-router';
@@ -13,19 +14,6 @@ export default class OwnerMenuList extends React.Component {
     this.state = {
       category: null,
     };
-  }
-  componentDidUpdate() {
-    const masonryInit = function () {
-      const $container = $('#masonry-grid');
-
-      // initialize
-      $container.masonry({
-        columnWidth: '.col',
-        itemSelector: '.col',
-      });
-    };
-
-    Meteor.setTimeout(masonryInit, 0);
   }
 
   getCategory() {
@@ -54,13 +42,9 @@ export default class OwnerMenuList extends React.Component {
     }
   }
 
-  getMenuItems() {
-    const { menus } = this.props;
-    if (menus.length > 0) {
-      return menus.map(menu => <OwnerMenuItem key={menu._id} menuItem={menu}/>);
-    }
-
-    return <h4 className="center-align">Не знайдено нічогісінько...</h4>;
+  getMenuList() {
+    const { menuList } = this.props;
+    return menuList.map(menu => <OwnerMenuItem key={menu._id} menuItem={menu}/>);
   }
 
   render() {
@@ -92,9 +76,11 @@ export default class OwnerMenuList extends React.Component {
           </div>
 
           <div className="col s12 m12 l8">
-            <div id="masonry-grid">
-              {this.getMenuItems()}
-            </div>
+            {
+              this.props.menuList.length ?
+                <Masonry className={'row'}>{this.getMenuList()}</Masonry> :
+                <h4 className="center-align">Не знайдено нічогісінько...</h4>
+            }
           </div>
         </div>
 

@@ -17,11 +17,13 @@ export default class Header extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
+    const sidebarInit = () => {
       $('.button-collapse').sideNav({
         menuWidth: 240,
       });
-    }, 500);
+    };
+
+    Meteor.setTimeout(sidebarInit, 0);
   }
 
   itemsInCartPrice() {

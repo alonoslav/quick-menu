@@ -12,16 +12,15 @@ import { Category } from '/imports/api/category/category';
 export default createContainer(() => {
   const categoryId = FlowRouter.getParam('category');
 
-  const subscription = Meteor.subscribe('menu.all', categoryId);
+  Meteor.subscribe('menu.all', categoryId);
   const query = categoryId ? { categoryId } : {};
-  const menus = Menu.find(query).fetch();
+  const menuList = Menu.find(query).fetch();
 
   Meteor.subscribe('category.byOrganization');
   const categories = Category.find().fetch();
 
   return {
-    menus,
+    menuList,
     categories,
-    ready: subscription.ready(),
   };
 }, OwnerMenuList);
