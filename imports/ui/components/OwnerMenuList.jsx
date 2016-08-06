@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import { $ } from 'meteor/jquery';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-
 import OwnerMenuItem from './OwnerMenuItem';
 
 export default class OwnerMenuList extends React.Component {
@@ -16,8 +15,26 @@ export default class OwnerMenuList extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const masonryInit = function () {
+      const $container = $('#masonry-grid');
+
+      // initialize
+      $container.masonry({
+        columnWidth: '.col',
+        itemSelector: '.col',
+      });
+    };
+
+    Meteor.setTimeout(masonryInit, 1000);
+  }
+
+  getCategory() {
+    return FlowRouter.getParam('category');
+  }
+
   isActiveCategory(categoryId) {
-    const category = FlowRouter.getParam('category');
+    const category = this.getCategory();
     return categoryId === category;
   }
 
@@ -59,6 +76,11 @@ export default class OwnerMenuList extends React.Component {
       marginLeft: '-27px',
     };
 
+    const category = this.getCategory();
+    const linkToCreateMenu = FlowRouter.url('ownerCreateMenu', {
+      category,
+    });
+
     return (
       <div>
         <div className="row">
@@ -71,12 +93,14 @@ export default class OwnerMenuList extends React.Component {
           </div>
 
           <div className="col s12 m12 l8">
-            {this.getMenuItems()}
+            <div id="masonry-grid">
+              {this.getMenuItems()}
+            </div>
           </div>
         </div>
 
         <div className="fixed-action-btn" style={floatButtonStyle}>
-          <a className={floatButtonClass} href="/owner-crete-menu">
+          <a className={floatButtonClass} href={linkToCreateMenu}>
             <i className="material-icons">add</i>
           </a>
         </div>

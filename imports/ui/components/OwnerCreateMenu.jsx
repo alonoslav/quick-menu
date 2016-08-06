@@ -45,9 +45,11 @@ export default class OwnerCreateMenu extends React.Component {
   }
 
   render() {
+    const category = FlowRouter.getParam('category');
+
     return (
       <div className="row">
-        <form className="col s12" onSubmit={this.createMenu.bind(this)}>
+        <form className="col s12 l6 offset-l3 m8 offset-m2" onSubmit={this.createMenu.bind(this)}>
           <div className="row">
             <div className="input-field col s12">
               <input id="name" ref="name" type="text" className="validate" required={true}/>
@@ -64,7 +66,7 @@ export default class OwnerCreateMenu extends React.Component {
 
           <div className="row">
             <div className="input-field col s12" required={true}>
-              <select ref="categoryId">
+              <select ref="categoryId" value={category} readOnly={true}>
                 {this.getCategories()}
               </select>
               <label>Категорія</label>
@@ -73,7 +75,8 @@ export default class OwnerCreateMenu extends React.Component {
 
           <div className="row">
             <div className="input-field col s12" required={true}>
-              <textarea id="description" ref="description" className="materialize-textarea"></textarea>
+              <textarea id="description" ref="description"
+                        className="materialize-textarea"></textarea>
               <label htmlFor="description">Опис</label>
             </div>
           </div>

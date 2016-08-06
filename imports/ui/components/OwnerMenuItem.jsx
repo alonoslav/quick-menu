@@ -39,7 +39,7 @@ export default class OwnerMenuItem extends React.Component {
     };
 
     return (
-      <div className="col s12 m6 l4">
+      <div className="col s6 m4">
         <div className="card">
           <div className="card-image waves-effect waves-block waves-light">
             <img className="activator" src={this.props.menuItem.photo}/>
@@ -69,7 +69,7 @@ export default class OwnerMenuItem extends React.Component {
               {this.props.menuItem.name}
               <i className={iconsClass}>close</i>
             </span>
-            <p dangerouslySetInnerHTML={{__html: this.props.menuItem.description}}>
+            <p dangerouslySetInnerHTML={{ __html: this.props.menuItem.description }}>
             </p>
           </div>
         </div>

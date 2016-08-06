@@ -101,7 +101,7 @@ FlowRouter.route('/owner-menu/:category?', {
   },
 });
 
-FlowRouter.route('/owner-crete-menu', {
+FlowRouter.route('/owner-crete-menu/:category?', {
   name: 'ownerCreateMenu',
   action() {
     mount(OwnersLayout, {
