@@ -10,7 +10,7 @@ import CommonAlerts from '/imports/utils/CommonAlerts';
 
 export default class OwnerCreateMenu extends React.Component {
   componentDidMount() {
-    Meteor.setTimeout(() => $('select').material_select(), 500);
+    Meteor.setTimeout(() => $('select').material_select(), 1000);
   }
 
   getCategories() {
@@ -49,7 +49,7 @@ export default class OwnerCreateMenu extends React.Component {
 
     return (
       <div className="row">
-        <form className="col s12 l6 offset-l3 m8 offset-m2" onSubmit={this.createMenu.bind(this)}>
+        <form className="col s12 l6 offset-l3 m8 ofm2" onSubmit={this.createMenu.bind(this)}>
           <div className="row">
             <div className="input-field col s12">
               <input id="name" ref="name" type="text" className="validate" required={true}/>
