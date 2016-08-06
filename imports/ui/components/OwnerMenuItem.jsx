@@ -69,8 +69,7 @@ export default class OwnerMenuItem extends React.Component {
               {this.props.menuItem.name}
               <i className={iconsClass}>close</i>
             </span>
-            <p>
-              {this.props.menuItem.description}
+            <p dangerouslySetInnerHTML={{__html: this.props.menuItem.description}}>
             </p>
           </div>
         </div>

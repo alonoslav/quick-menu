@@ -15,6 +15,7 @@ import CartContainer from '/imports/ui/conteiners/CartContainer';
 import MenuListContainer from '/imports/ui/conteiners/MenuListContainer';
 import OrdersListContainer from '/imports/ui/conteiners/OrdersListContainer';
 import OwnerMenuListContainer from '/imports/ui/conteiners/OwnerMenuListContainer';
+import OwnerCreateMenuContainer from '/imports/ui/conteiners/OwnerCreateMenuContainer';
 
 const requireLogin = function () {
   if (!Meteor.loggingIn()) {
@@ -98,4 +99,14 @@ FlowRouter.route('/owner-menu/:category?', {
       title: 'Керування меню'
     });
   },
+});
+
+FlowRouter.route('/owner-crete-menu', {
+  name: 'ownerCreateMenu',
+  action() {
+    mount(OwnersLayout, {
+      content: <OwnerCreateMenuContainer />,
+      title: 'Створити меню',
+    });
+  }
 });

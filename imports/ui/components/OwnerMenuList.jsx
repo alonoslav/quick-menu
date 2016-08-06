@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import { $ } from 'meteor/jquery';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-import EditCategoryModal from './EditCategoryModal';
 
 import OwnerMenuItem from './OwnerMenuItem';
 
@@ -53,6 +52,13 @@ export default class OwnerMenuList extends React.Component {
       active: this.isActiveCategory(undefined),
     });
 
+    const floatButtonClass = "btn-floating btn-large waves-effect waves-light red fixed";
+    const floatButtonStyle = {
+      bottom: '15px',
+      left: '50%',
+      marginLeft: '-27px',
+    };
+
     return (
       <div>
         <div className="row">
@@ -69,7 +75,11 @@ export default class OwnerMenuList extends React.Component {
           </div>
         </div>
 
-        <EditCategoryModal category={this.state.category}/>
+        <div className="fixed-action-btn" style={floatButtonStyle}>
+          <a className={floatButtonClass} href="/owner-crete-menu">
+            <i className="material-icons">add</i>
+          </a>
+        </div>
       </div>
     );
   }

@@ -14,4 +14,15 @@ export default class Misc {
       }
     };
   }
+
+  static getValuesFromRefs(refs, fields, trim) {
+    const values = {};
+
+    fields.forEach(field => {
+      let value = refs[field].value;
+      values[field] = trim ? value.trim() : value;
+    });
+
+    return values;
+  }
 }
