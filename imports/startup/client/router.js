@@ -77,6 +77,8 @@ FlowRouter.route('/cart', {
 FlowRouter.route('/logout', {
   name: 'logout',
   action() {
+    localStorage.removeItem('cart');
+    localStorage.removeItem('table');
     Meteor.logout();
     FlowRouter.go('signIn');
   },
