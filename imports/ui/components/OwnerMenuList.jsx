@@ -14,8 +14,7 @@ export default class OwnerMenuList extends React.Component {
       category: null,
     };
   }
-
-  componentDidMount() {
+  componentDidUpdate() {
     const masonryInit = function () {
       const $container = $('#masonry-grid');
 
@@ -26,7 +25,7 @@ export default class OwnerMenuList extends React.Component {
       });
     };
 
-    Meteor.setTimeout(masonryInit, 1000);
+    Meteor.setTimeout(masonryInit, 0);
   }
 
   getCategory() {
