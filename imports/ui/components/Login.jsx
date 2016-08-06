@@ -8,10 +8,10 @@ export default class Login extends React.Component {
   loginHandler(event) {
     event.preventDefault();
 
-    const email = this.refs.email.value.trim();
+    const username = this.refs.username.value.trim();
     const password = this.refs.password.value.trim();
 
-    return Meteor.loginWithPassword({ email }, password, Misc.handleMethodResult(() => {
+    return Meteor.loginWithPassword({ username }, password, Misc.handleMethodResult(() => {
       FlowRouter.go('dashboard');
     }));
   }
@@ -26,8 +26,8 @@ export default class Login extends React.Component {
 
             <div className="row">
               <div className="input-field col s12">
-                <input type="email" ref="email" required="required"/>
-                <label htmlFor="email">Email</label>
+                <input type="text" ref="username" required="required"/>
+                <label htmlFor="username">Ім’я користувача</label>
               </div>
             </div>
 
