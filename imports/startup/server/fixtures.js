@@ -5,7 +5,6 @@ import { Random } from 'meteor/random';
 import { Organization } from '/imports/api/organization/organization';
 import { Table } from '/imports/api/table/table';
 import { Category } from '/imports/api/category/category';
-import { Menu } from '/imports/api/menu/menu';
 
 if (Meteor.users.find().count() === 0) {
   Accounts.createUser({
@@ -17,31 +16,28 @@ if (Meteor.users.find().count() === 0) {
 
 if (Organization.find().count() === 0) {
   const ownerId = Accounts.createUser({
-    username: 'test owner',
-    email: 'test.owner@mail.com',
-    password: 'qweqweqwe',
+    username: 'freespace.owner',
+    password: '897vuq',
   });
 
   const organizationId = Organization.insert({
-    name: 'Test org',
+    name: 'FreeSpace',
     owner: ownerId,
   });
 
   Accounts.createUser({
-    username: 'test waiter',
-    email: 'test.waiter@mail.com',
-    password: 'qweqweqwe',
+    username: 'freespace.waiter',
+    password: '098121315',
   });
 
   Accounts.createUser({
-    username: 'test customer',
-    email: 'test.customer@mail.com',
-    password: 'qweqweqwe'
+    username: 'freespace.customer',
+    password: '1230984756'
   });
 
   Meteor.users.update({}, { $set: { organizationId } }, { multi: true });
 
-  ['1', '2', '3'].forEach(name => {
+  ['1', '2', '3', '4', '5', '6'].forEach(name => {
     return Table.insert({
       name,
       organizationId
@@ -52,19 +48,15 @@ if (Organization.find().count() === 0) {
 
   const categories = [{
     name: 'Закуски',
-    urlName: 'appetizer',
     icon: 'appetizer.png',
   }, {
     name: 'Напої',
-    urlName: 'drinks',
     icon: 'drinks.png',
   }, {
     name: 'Фаст-фуд',
-    urlName: 'fast-food',
     icon: 'fast-food.png',
   }, {
     name: 'Кальяни',
-    urlName: 'hookah',
     icon: 'hookah.png',
   }];
 
@@ -79,34 +71,4 @@ if (Organization.find().count() === 0) {
 
     categoryIds.push(categoryId);
   });
-
-  const description = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-    Aliquam molestie risus sit amet commodo finibus. Curabitur et bibendum lorem. 
-    Quisque ut nisi metus. Donec ornare venenatis rhoncus. Etiam scelerisque dui 
-    et ornare varius. Duis id odio in neque hendrerit sagittis. Maecenas congue enim 
-    ut vehicula pharetra. Duis venenatis magna eget erat porttitor tempor. Proin tempor 
-    auctor urna, eget tempus nunc porta ut. Ut massa ligula, ornare in enim eu, pharetra 
-    tincidunt justo. Integer sagittis nisi ac ante viverra, et ultricies tortor volutpat. 
-    Integer tortor nisl, viverra nec ornare id, dignissim hendrerit turpis. Duis porta 
-    metus non enim tincidunt molestie. In malesuada mollis elit ac ornare.`;
-
-  const photo = '/menu/menu.jpeg';
-
-  const names = description.replace(/\n/g, '').replace(/\s\s/g, '').split(' ');
-
-  for (let i = 0; i < 9; i++) {
-    const price = parseInt(Math.random() * 10000, 10) / 100;
-    const name = Random.choice(names);
-    const categoryId = Random.choice(categoryIds);
-
-    Menu.insert({
-      name,
-      organizationId,
-      categoryId,
-      description,
-      photo,
-      price,
-      inTop: false,
-    });
-  }
 }
