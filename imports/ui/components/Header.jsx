@@ -84,9 +84,9 @@ export default class Header extends React.Component {
               <i className="material-icons">menu</i>
             </a>
 
-            <a href="/" className="brand-logo center">
+            <span className="brand-logo center">
               {this.getTitle()}
-            </a>
+            </span>
 
             <ul className="right">
               <li className={priceClass}>

@@ -32,10 +32,14 @@ export default class HeaderMobile extends React.Component {
   }
 
   render() {
+    const onLogoClick = function () {
+      this.props.onClick();
+    };
+
     return (
       <ul id="nav-mobile" className="side-nav fixed">
         <li className="logo">
-          <a id="logo-container" href="/" className="brand-logo">
+          <a id="logo-container" href="/menu-list" className="brand-logo" onClick={onLogoClick.bind(this)}>
             <img src="/logo.png" />
           </a>
         </li>
