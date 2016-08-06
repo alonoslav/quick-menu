@@ -9,7 +9,7 @@ export default class HeaderMobile extends React.Component {
     let { categories } = this.props;
 
     const allMenus = {
-      _id: 'all',
+      _id: '',
       icon: 'all.png',
       name: 'Все меню'
     };
