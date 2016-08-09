@@ -1,6 +1,12 @@
 import React from 'react';
 
 export default class OrderItemRow extends React.Component {
+  getTotal() {
+    const { item } = this.props;
+    const total = item.price * item.count;
+    return total.toFixed(2);
+  }
+
   render() {
     const { item } = this.props;
 
@@ -11,7 +17,7 @@ export default class OrderItemRow extends React.Component {
         </div>
 
         <div className="col s7 right-align">
-          {item.price * item.count} грн. ({item.price} грн. x {item.count})
+          {this.getTotal()} грн. ({item.price} грн. x {item.count})
         </div>
       </div>
     );

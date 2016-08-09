@@ -35,9 +35,11 @@ export default class OrderItem extends React.Component {
   getTotal() {
     const { orderedItems } = this.props.order;
 
-    return orderedItems.reduce((memo, item) => {
+    const total = orderedItems.reduce((memo, item) => {
       return memo + item.price * item.count;
     }, 0);
+
+    return total.toFixed(2);
   }
 
   approveOrder(event) {
