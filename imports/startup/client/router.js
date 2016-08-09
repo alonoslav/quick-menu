@@ -25,8 +25,13 @@ const requireLogin = function () {
   }
 };
 
+const requireOrganization = function () {
+  if (!localStorage.getItem('organization')) {
+    FlowRouter.go('signIn');
+  }
+};
+
 FlowRouter.route('/', {
-  triggersEnter: [requireLogin],
   name: 'dashboard',
   action() {
     mount(MainLayout, {
@@ -38,6 +43,7 @@ FlowRouter.route('/', {
 
 FlowRouter.route('/menu-list/:category?', {
   name: 'menuList',
+  triggersEnter: [requireOrganization],
   action() {
     mount(MainLayout, {
       content: <MenuListContainer />,
@@ -47,6 +53,7 @@ FlowRouter.route('/menu-list/:category?', {
 });
 
 FlowRouter.route('/orders-list', {
+  triggersEnter: [requireLogin],
   name: 'ordersList',
   action() {
     mount(WaitersLayout, {
@@ -104,11 +111,21 @@ FlowRouter.route('/owner-menu/:category?', {
 });
 
 FlowRouter.route('/owner-crete-menu/:category?', {
+  triggersEnter: [requireLogin],
   name: 'ownerCreateMenu',
   action() {
     mount(OwnersLayout, {
       content: <OwnerCreateMenuContainer />,
       title: 'Створити меню',
     });
+  }
+});
+
+FlowRouter.route('/:organization/:table', {
+  name: 'qrMountPoint',
+  action() {
+    localStorage.setItem('organization', FlowRouter.getParam('organization'));
+    localStorage.setItem('table', FlowRouter.getParam('table'));
+    FlowRouter.go('menuList');
   }
 });

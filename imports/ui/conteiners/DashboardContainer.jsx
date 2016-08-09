@@ -10,14 +10,12 @@ export default createContainer(() => {
   const userId = Meteor.userId();
   const permissionChecker = new PermissionChecker(userId);
 
-  if (permissionChecker.isCustomer()) {
-    FlowRouter.go('menuList');
-  } else if (permissionChecker.isWaiter()) {
+  if (permissionChecker.isWaiter()) {
     FlowRouter.go('ordersList');
   } else if (permissionChecker.isOwner()) {
     FlowRouter.go('ownerMenuList');
   } else {
-    FlowRouter.go('dashboard');
+    FlowRouter.go('menuList');
   }
 
   return {
