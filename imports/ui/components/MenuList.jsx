@@ -17,7 +17,7 @@ export default class MenuList extends React.Component {
   render() {
     return (
       <div>
-        {this.props.tableChosen ? '' : <TableChooserContainer />}
+        {this.props.organizationId ? this.props.tableChosen ? '' : <TableChooserContainer /> : ''}
 
         {
           this.props.menuList.length ?

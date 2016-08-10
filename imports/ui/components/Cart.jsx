@@ -36,7 +36,7 @@ export default class Cart extends React.Component {
 
     Meteor.call('order.create', cartItems, table, Misc.handleMethodResult(() => {
       Session.set('cart', null);
-      CommonAlerts.success('Ваше замовлення прийняте. Очікуйте підтвердження.');
+      CommonAlerts.success('Ваше замовлення прийняте.');
       return FlowRouter.go('/menu-list');
     }));
   }

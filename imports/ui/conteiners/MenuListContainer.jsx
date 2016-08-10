@@ -11,9 +11,12 @@ import { Menu } from '/imports/api/menu/menu';
 
 export default createContainer(() => {
   const user = Meteor.user();
+  const organizationId = localStorage.getItem('organization');
   const tableChosen = localStorage.getItem('table');
+
   const categoryId = FlowRouter.getParam('category');
 
+  Meteor.subscribe('organization.byId', organizationId);
   Meteor.subscribe('menu.all', categoryId);
 
   const query = categoryId ? { categoryId } : {};
@@ -26,6 +29,7 @@ export default createContainer(() => {
     user,
     menuList,
     tableChosen,
+    organizationId,
     cartItems: Session.get('cart'),
   };
 }, MenuList);

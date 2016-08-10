@@ -5,6 +5,7 @@ import { Meteor } from 'meteor/meteor';
 import { FlowRouter } from 'meteor/kadira:flow-router'
 
 import BlankLayout from '/imports/ui/layouts/BlankLayout';
+import BlankLayoutContainer from '/imports/ui/layouts/BlankLayoutContainer';
 import MainLayout from '/imports/ui/layouts/MainLayout';
 import WaitersLayout from '/imports/ui/layouts/WaitersLayout';
 import OwnersLayout from '/imports/ui/layouts/OwnersLayout';
@@ -19,7 +20,7 @@ import OwnerCreateMenuContainer from '/imports/ui/conteiners/OwnerCreateMenuCont
 
 const requireLogin = function () {
   if (!Meteor.loggingIn()) {
-    if (!Meteor.user()) {
+    if (!Meteor.userId()) {
       FlowRouter.go('signIn');
     }
   }
@@ -27,9 +28,18 @@ const requireLogin = function () {
 
 const requireOrganization = function () {
   if (!localStorage.getItem('organization')) {
+    Meteor.logout();
+
     FlowRouter.go('signIn');
   }
 };
+
+const loggedIn = function () {
+  if (Meteor.userId()) {
+    FlowRouter.go('/');
+  }
+};
+
 
 FlowRouter.route('/', {
   name: 'dashboard',
@@ -65,8 +75,9 @@ FlowRouter.route('/orders-list', {
 
 FlowRouter.route('/sign-in', {
   name: 'signIn',
+  triggersEnter: [loggedIn],
   action() {
-    mount(BlankLayout, {content: <LoginContainer />});
+    mount(BlankLayoutContainer, {content: <LoginContainer />});
   }
 });
 
@@ -124,8 +135,15 @@ FlowRouter.route('/owner-crete-menu/:category?', {
 FlowRouter.route('/:organization/:table', {
   name: 'qrMountPoint',
   action() {
-    localStorage.setItem('organization', FlowRouter.getParam('organization'));
-    localStorage.setItem('table', FlowRouter.getParam('table'));
+    const saveToLocalStorage = function (item, value) {
+      localStorage.setItem(item, value);
+    };
+
+    localStorage.clear();
+
+    saveToLocalStorage('organization', FlowRouter.getParam('organization'));
+    saveToLocalStorage('table', FlowRouter.getParam('table'));
+
     FlowRouter.go('menuList');
   }
 });

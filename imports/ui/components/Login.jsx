@@ -12,7 +12,12 @@ export default class Login extends React.Component {
     const password = this.refs.password.value.trim();
 
     return Meteor.loginWithPassword({ username }, password, Misc.handleMethodResult(() => {
-      FlowRouter.go('dashboard');
+      const user = Meteor.user();
+      const organizationId = user && user.organizationId;
+
+      localStorage.setItem('organization', organizationId);
+
+      FlowRouter.go('menuList');
     }));
   }
 
