@@ -3,6 +3,7 @@ import Masonry from 'react-masonry-component';
 
 import MenuItem from './MenuItem';
 import TableChooserContainer from '../conteiners/TableChooserContainer';
+import Loader from './Loader';
 
 
 export default class MenuList extends React.Component {
@@ -22,7 +23,7 @@ export default class MenuList extends React.Component {
         {
           this.props.menuList.length ?
             <Masonry className={'row'}>{this.getMenuList()}</Masonry> :
-            <h4 className="center-align">Не знайдено нічогісінько...</h4>
+            <Loader/>
         }
       </div>
     );

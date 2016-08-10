@@ -6,6 +6,7 @@ import { $ } from 'meteor/jquery';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import OwnerMenuItem from './OwnerMenuItem';
+import Loader from './Loader';
 
 export default class OwnerMenuList extends React.Component {
   constructor(props) {
@@ -79,7 +80,7 @@ export default class OwnerMenuList extends React.Component {
             {
               this.props.menuList.length ?
                 <Masonry className={'row'}>{this.getMenuList()}</Masonry> :
-                <h4 className="center-align">Не знайдено нічогісінько...</h4>
+                <Loader/>
             }
           </div>
         </div>

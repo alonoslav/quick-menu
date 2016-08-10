@@ -11,6 +11,7 @@
     "react-addons-pure-render-mixin": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-masonry-component": "^4.2.1",
-    "react-mounter": "^1.2.0"
+    "react-mounter": "^1.2.0",
+    "react-simple-spinner": "0.0.7-alpha"
   }
 }
