@@ -17,7 +17,7 @@ export default class Login extends React.Component {
 
       localStorage.setItem('organization', organizationId);
 
-      FlowRouter.go('menuList');
+      FlowRouter.go('/');
     }));
   }
 

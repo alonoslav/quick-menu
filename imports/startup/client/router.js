@@ -97,6 +97,8 @@ FlowRouter.route('/logout', {
   action() {
     localStorage.removeItem('cart');
     localStorage.removeItem('table');
+    localStorage.removeItem('organization');
+
     Meteor.logout();
     FlowRouter.go('signIn');
   },

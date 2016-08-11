@@ -89,7 +89,7 @@ export default class OrderItem extends React.Component {
                   {
                     this.props.order.status === 'new' ?
                       <a href="#" onClick={this.approveOrder.bind(this)}>
-                        Підтвердити замовлення
+                        Прийняти замовлення
                       </a>
                       :
                       <a href="#" onClick={this.closeOrder.bind(this)}>
