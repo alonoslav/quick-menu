@@ -3,6 +3,8 @@ import classNames from 'classnames';
 
 import { Session } from 'meteor/session';
 
+import CommonAlerts from '../../utils/CommonAlerts';
+
 import { Category } from '/imports/api/category/category';
 
 export default class MenuItem extends React.Component {
@@ -22,8 +24,10 @@ export default class MenuItem extends React.Component {
     const cartItems = this.props.cartItems;
 
     if (this.isInCart()) {
+      CommonAlerts.success('Видалено з кошика');
       delete cartItems[id];
     } else {
+      CommonAlerts.success('Додано до кошика');
       cartItems[id] = 1;
     }
 
@@ -61,7 +65,7 @@ export default class MenuItem extends React.Component {
       <div className="col s12 m6 l4">
         <div className="card">
           <div className="card-image waves-effect waves-block waves-light">
-            <img className="activator" src={this.props.menuItem.photo}/>
+            <img src={this.props.menuItem.photo} onClick={this.toggleAddToCart.bind(this)}/>
           </div>
           <div className="card-content">
             <span className="card-title activator grey-text text-darken-4">
@@ -70,13 +74,16 @@ export default class MenuItem extends React.Component {
                  className="badge orange-text"
                  style={badgeStyle}>
                 {this.getCategoryName()}
-                </a>
+              </a>
 
-              <i className={iconsClass}>more_vert</i>
+              {
+                this.props.menuItem.description ?
+                  <i className={iconsClass}>more_vert</i> : ''
+              }
             </span>
             <p>
               <span style={priceStyle}>
-                {this.formatPrice(this.props.menuItem.price)} грн.
+                  {this.formatPrice(this.props.menuItem.price)} грн.
               </span>
               <a href="#"
                  className={toCartButtonClass}
@@ -87,14 +94,18 @@ export default class MenuItem extends React.Component {
               </a>
             </p>
           </div>
-          <div className="card-reveal">
+
+          {
+            this.props.menuItem.description ?
+              <div className="card-reveal">
             <span className="card-title grey-text text-darken-4">
               {this.props.menuItem.name}
               <i className={iconsClass}>close</i>
             </span>
-            <p dangerouslySetInnerHTML={{ __html: this.props.menuItem.description }}>
-            </p>
-          </div>
+                <p dangerouslySetInnerHTML={{ __html: this.props.menuItem.description }}>
+                </p>
+              </div> : ''
+          }
         </div>
       </div>
     );
