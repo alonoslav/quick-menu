@@ -54,11 +54,18 @@ export default class MenuItem extends React.Component {
         'grey': this.isInCart()
       });
 
-    const iconsClass = "material-icons right waves-effect waves-circle waves-circle-auto-size";
+    const moreIconClass = "material-icons waves-effect waves-circle waves-circle-auto-size hide-on-med-and-up";
+
+    const closeIconClass = "material-icons right waves-effect waves-circle waves-circle-auto-size";
 
     const badgeStyle = {
       fontSize: '16px',
       marginLeft: '10px',
+    };
+
+    const moreTextStyle = {
+      fontSize: '18px',
+      textDecoration: 'underline',
     };
 
     return (
@@ -78,7 +85,11 @@ export default class MenuItem extends React.Component {
 
               {
                 this.props.menuItem.description ?
-                  <i className={iconsClass}>more_vert</i> : ''
+                  <span className="right">
+                    <i className={moreIconClass}>more_vert</i>
+                    <span className="hide-on-small-only activator"
+                          style={moreTextStyle}>Більше</span>
+                  </span> : ''
               }
             </span>
             <p>
@@ -98,12 +109,24 @@ export default class MenuItem extends React.Component {
           {
             this.props.menuItem.description ?
               <div className="card-reveal">
-            <span className="card-title grey-text text-darken-4">
-              {this.props.menuItem.name}
-              <i className={iconsClass}>close</i>
-            </span>
-                <p dangerouslySetInnerHTML={{ __html: this.props.menuItem.description }}>
-                </p>
+                <span className="card-title grey-text text-darken-4">
+                  {this.props.menuItem.name}
+                  <i className={closeIconClass}>close</i>
+                </span>
+                <p className="description-container" dangerouslySetInnerHTML={{ __html: this.props.menuItem.description }} />
+
+                <p className="price-container">
+                  <span style={priceStyle}>
+                      {this.formatPrice(this.props.menuItem.price)} грн.
+                  </span>
+                  <a href="#"
+                     className={toCartButtonClass}
+                     onClick={this.toggleAddToCart.bind(this)}>
+                    <i className="material-icons left">
+                      {this.isInCart() ? 'delete' : 'shopping_cart'}
+                    </i>
+                  </a>
+                  </p>
               </div> : ''
           }
         </div>
