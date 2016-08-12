@@ -17,7 +17,7 @@ export default createContainer(() => {
   const categoryId = FlowRouter.getParam('category');
 
   Meteor.subscribe('organization.byId', organizationId);
-  Meteor.subscribe('menu.all', categoryId);
+  const subscription = Meteor.subscribe('menu.all', categoryId);
 
   const query = categoryId ? { categoryId } : {};
   const menuList = Menu.find(query, { sort: { categoryId: 1 } }).fetch();
@@ -31,5 +31,6 @@ export default createContainer(() => {
     tableChosen,
     organizationId,
     cartItems: Session.get('cart'),
+    ready: subscription.ready(),
   };
 }, MenuList);

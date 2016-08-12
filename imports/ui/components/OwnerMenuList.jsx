@@ -78,9 +78,10 @@ export default class OwnerMenuList extends React.Component {
 
           <div className="col s12 m12 l8">
             {
+              !this.props.ready ? <Loader/> :
               this.props.menuList.length ?
                 <Masonry className={'row'}>{this.getMenuList()}</Masonry> :
-                <Loader/>
+                <h3 className="center-align">Нічого не знайдено</h3>
             }
           </div>
         </div>

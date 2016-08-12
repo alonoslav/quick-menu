@@ -12,7 +12,8 @@ import { Category } from '/imports/api/category/category';
 export default createContainer(() => {
   const categoryId = FlowRouter.getParam('category');
 
-  Meteor.subscribe('menu.all', categoryId);
+  const subscription = Meteor.subscribe('menu.all', categoryId);
+
   const query = categoryId ? { categoryId } : {};
   const menuList = Menu.find(query).fetch();
 
@@ -22,5 +23,6 @@ export default createContainer(() => {
   return {
     menuList,
     categories,
+    ready: subscription.ready(),
   };
 }, OwnerMenuList);

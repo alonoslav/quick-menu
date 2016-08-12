@@ -21,9 +21,10 @@ export default class MenuList extends React.Component {
         {this.props.organizationId ? this.props.tableChosen ? '' : <TableChooserContainer /> : ''}
 
         {
+          !this.props.ready ? <Loader/> :
           this.props.menuList.length ?
             <Masonry className={'row'}>{this.getMenuList()}</Masonry> :
-            <Loader/>
+            <h3 className="center-align">Нічого не знайдено</h3>
         }
       </div>
     );
