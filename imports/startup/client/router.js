@@ -34,12 +34,6 @@ const requireOrganization = function () {
   }
 };
 
-const loggedIn = function () {
-  if (Meteor.userId()) {
-    FlowRouter.go('/');
-  }
-};
-
 
 FlowRouter.route('/', {
   name: 'dashboard',
@@ -75,7 +69,6 @@ FlowRouter.route('/orders-list', {
 
 FlowRouter.route('/sign-in', {
   name: 'signIn',
-  triggersEnter: [loggedIn],
   action() {
     mount(BlankLayoutContainer, {content: <LoginContainer />});
   }
