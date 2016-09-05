@@ -6,6 +6,8 @@ import { $ } from 'meteor/jquery';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import OwnerMenuItem from './OwnerMenuItem';
+import OwnerCategoryItem from './OwnerCategoryItem';
+import OwnerEditCategoryModal from './OwnerEditCategoryModal';
 import Loader from './Loader';
 
 export default class OwnerMenuList extends React.Component {
@@ -30,16 +32,8 @@ export default class OwnerMenuList extends React.Component {
     const { categories } = this.props;
 
     if (categories.length) {
-      return categories.map(category => {
-        const link = `/owner-menu/${category._id}`;
-        const linkClass = classNames('collection-item', {
-          active: this.isActiveCategory(category._id),
-        });
-
-        return <a key={category._id} href={link} className={linkClass}>
-          {category.name}
-        </a>
-      });
+      return categories.map(category => <OwnerCategoryItem category={category}
+                                                           key={category._id}/>);
     }
   }
 
@@ -74,14 +68,16 @@ export default class OwnerMenuList extends React.Component {
 
               {this.getCategories()}
             </div>
+
+            <OwnerEditCategoryModal category={this.getCategory()}/>
           </div>
 
           <div className="col s12 m12 l8">
             {
               !this.props.ready ? <Loader/> :
-              this.props.menuList.length ?
-                <Masonry className={'row'}>{this.getMenuList()}</Masonry> :
-                <h3 className="center-align">Нічого не знайдено</h3>
+                this.props.menuList.length ?
+                  <Masonry className={'row'}>{this.getMenuList()}</Masonry> :
+                  <h3 className="center-align">Нічого не знайдено</h3>
             }
           </div>
         </div>
