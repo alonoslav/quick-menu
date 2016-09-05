@@ -4,7 +4,6 @@ import { mount } from 'react-mounter';
 import { Meteor } from 'meteor/meteor';
 import { FlowRouter } from 'meteor/kadira:flow-router'
 
-import BlankLayout from '/imports/ui/layouts/BlankLayout';
 import BlankLayoutContainer from '/imports/ui/layouts/BlankLayoutContainer';
 import MainLayout from '/imports/ui/layouts/MainLayout';
 import WaitersLayout from '/imports/ui/layouts/WaitersLayout';
@@ -17,6 +16,7 @@ import MenuListContainer from '/imports/ui/conteiners/MenuListContainer';
 import OrdersListContainer from '/imports/ui/conteiners/OrdersListContainer';
 import OwnerMenuListContainer from '/imports/ui/conteiners/OwnerMenuListContainer';
 import OwnerCreateMenuContainer from '/imports/ui/conteiners/OwnerCreateMenuContainer';
+import OwnerEditMenuContainer from '/imports/ui/conteiners/OwnerEditMenuContainer';
 
 const requireLogin = function () {
   if (!Meteor.loggingIn()) {
@@ -123,6 +123,17 @@ FlowRouter.route('/owner-crete-menu/:category?', {
     mount(OwnersLayout, {
       content: <OwnerCreateMenuContainer />,
       title: 'Створити меню',
+    });
+  }
+});
+
+FlowRouter.route('/owner-edit-menu/:_id', {
+  triggersEnter: [requireLogin],
+  name: 'ownerEditMenu',
+  action() {
+    mount(OwnersLayout, {
+      content: <OwnerEditMenuContainer />,
+      title: 'Редагувати меню',
     });
   }
 });

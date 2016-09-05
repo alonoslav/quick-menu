@@ -5,26 +5,35 @@ import { _ } from 'meteor/underscore';
 import { Menu } from '/imports/api/menu/menu';
 import { Organization } from '/imports/api/organization/organization';
 
+const MenuItemDocument = {
+  _id: Match.Optional(String),
+  name: String,
+  categoryId: String,
+  description: String,
+  photo: String,
+  price: Number,
+  organizationId: Match.Optional(String),
+  inTop: Match.Optional(Boolean),
+};
+
 Meteor.methods({
   'menu.add'(menuItem) {
-    check(menuItem, {
-      name: String,
-      categoryId: String,
-      description: String,
-      photo: String,
-      price: Number,
-      organizationId: Match.Optional(String),
-      inTop: Match.Optional(Boolean),
-    });
+    check(menuItem, MenuItemDocument);
 
-    const organizationId = Organization.findOne({owner: this.userId});
+    const organization = Organization.findOne({ owner: this.userId });
 
     _.extend(menuItem, {
-      organizationId,
+      organizationId: organization._id,
       inTop: false,
     });
 
     return Menu.insert(menuItem);
+  },
+
+  'menu.edit'(menuItem) {
+    check(menuItem, MenuItemDocument);
+
+    return Menu.update({ _id: menuItem._id }, { $set: menuItem });
   },
 
   'menu.remove'(menuItem) {
@@ -34,6 +43,6 @@ Meteor.methods({
       throw new Meteor.Error('Недостатньо прав для цього');
     }
 
-    return Menu.remove({_id: menuItem._id});
+    return Menu.remove({ _id: menuItem._id });
   }
 });

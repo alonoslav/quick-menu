@@ -38,6 +38,10 @@ export default class OwnerMenuItem extends React.Component {
       marginLeft: '10px',
     };
 
+    const editMenuUrl = FlowRouter.url('ownerEditMenu', {
+      _id: this.props.menuItem._id,
+    });
+
     return (
       <div className="col s6 m4">
         <div className="card">
@@ -59,8 +63,12 @@ export default class OwnerMenuItem extends React.Component {
               <span style={priceStyle}>
                 {this.formatPrice(this.props.menuItem.price)} грн.
               </span>
+
               <a href="#" className="red-text" onClick={this.removeMenuItem.bind(this)}>
                 <i className="material-icons right">delete</i>
+              </a>
+              <a href={editMenuUrl} className="orange-text">
+                <i className="material-icons right">create</i>
               </a>
             </p>
           </div>

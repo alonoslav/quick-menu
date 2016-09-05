@@ -7,10 +7,11 @@ import OwnerCreateMenu from '../components/OwnerCreateMenu';
 import { Category } from '/imports/api/category/category';
 
 export default createContainer(() => {
-  Meteor.subscribe('category.byOrganization');
+  const subscription = Meteor.subscribe('category.byOrganization');
   const categories = Category.find().fetch();
 
   return {
     categories,
+    ready: subscription.ready(),
   };
 }, OwnerCreateMenu);

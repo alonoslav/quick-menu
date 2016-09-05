@@ -8,11 +8,13 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import Misc from '/imports/utils/Misc';
 import CommonAlerts from '/imports/utils/CommonAlerts';
 
-export default class OwnerCreateMenu extends React.Component {
-  componentDidMount() {
-    Meteor.setTimeout(() => $('select').material_select(), 1000);
-  }
 
+const onReady = () => {
+  Meteor.setTimeout(() => $('select').material_select(), 100);
+};
+
+
+export default class OwnerCreateMenu extends React.Component {
   getCategories() {
     const { categories } = this.props;
 
@@ -46,6 +48,10 @@ export default class OwnerCreateMenu extends React.Component {
 
   render() {
     const category = FlowRouter.getParam('category');
+
+    if (this.props.ready) {
+      onReady();
+    }
 
     return (
       <div className="row">
