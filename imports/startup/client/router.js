@@ -17,6 +17,7 @@ import OrdersListContainer from '/imports/ui/conteiners/OrdersListContainer';
 import OwnerMenuListContainer from '/imports/ui/conteiners/OwnerMenuListContainer';
 import OwnerCreateMenuContainer from '/imports/ui/conteiners/OwnerCreateMenuContainer';
 import OwnerEditMenuContainer from '/imports/ui/conteiners/OwnerEditMenuContainer';
+import OwnerTablesLinksContainer from '/imports/ui/conteiners/OwnerTablesLinksContainer';
 
 const requireLogin = function () {
   if (!Meteor.loggingIn()) {
@@ -70,7 +71,7 @@ FlowRouter.route('/orders-list', {
 FlowRouter.route('/sign-in', {
   name: 'signIn',
   action() {
-    mount(BlankLayoutContainer, {content: <LoginContainer />});
+    mount(BlankLayoutContainer, { content: <LoginContainer /> });
   }
 });
 
@@ -137,6 +138,16 @@ FlowRouter.route('/owner-edit-menu/:_id', {
     });
   }
 });
+
+FlowRouter.route('/tables-links', {
+  name: 'tablesLinks',
+  action() {
+    mount(OwnersLayout, {
+      content: <OwnerTablesLinksContainer />,
+      title: 'Посилання для QR-кодів',
+    });
+  }
+})
 
 FlowRouter.route('/:organization/:table', {
   name: 'qrMountPoint',
