@@ -97,6 +97,8 @@ export default class OwnerCreateMenu extends React.Component {
           <button className="btn waves-effect waves-light orange" type="submit" name="action">
             Створити
           </button>
+
+          <a href="/owner-menu" className="btn waves-effect waves-red btn-flat">Назад</a>
         </form>
       </div>
     );

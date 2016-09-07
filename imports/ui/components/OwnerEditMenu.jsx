@@ -113,6 +113,8 @@ export default class OwnerEditMenu extends React.Component {
             <button className="btn waves-effect waves-light orange" type="submit" name="action">
               Редагувати
             </button>
+
+            <a href="/owner-menu" className="btn waves-effect waves-red btn-flat">Назад</a>
           </form>
         </div>
       )
