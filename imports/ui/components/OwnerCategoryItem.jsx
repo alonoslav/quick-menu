@@ -4,7 +4,17 @@ import classNames from 'classnames';
 
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
+import OwnerEditCategoryModal from './OwnerEditCategoryModal';
+
 export default class OwnerCategoryItem extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      editModalOpened: false,
+    };
+  }
+
   goToCategory(event) {
     event.stopPropagation();
 
@@ -16,7 +26,15 @@ export default class OwnerCategoryItem extends React.Component {
   openEditCategory(event) {
     event.stopPropagation();
 
-    $('#modal1').openModal();
+    this.setState({
+      editModalOpened: true,
+    });
+  }
+
+  onEditCategorySuccess() {
+    this.setState({
+      editModalOpened: false,
+    });
   }
 
   render() {
@@ -32,11 +50,18 @@ export default class OwnerCategoryItem extends React.Component {
     };
 
     return (
-      <div className={linkClass} style={linkStyle} onClick={this.goToCategory.bind(this)}>
-        {category.name}
+      <div className={linkClass} style={linkStyle}>
+        <div  onClick={this.goToCategory.bind(this)}>
+          {category.name}
 
-        {/*<span href="#" style={linkStyle} className="material-icons right orange-text"*/}
-              {/*onClick={this.openEditCategory.bind(this)}>create</span>*/}
+          <span href="#" style={linkStyle} className="material-icons right orange-text"
+                onClick={this.openEditCategory.bind(this)}>create</span>
+        </div>
+
+        {this.state.editModalOpened ?
+          <OwnerEditCategoryModal category={this.props.category}
+                                  onEditCategory={this.onEditCategorySuccess.bind(this)}/> :
+          ''}
       </div>
     );
   }

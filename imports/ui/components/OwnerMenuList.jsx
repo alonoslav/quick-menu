@@ -11,14 +11,6 @@ import OwnerEditCategoryModal from './OwnerEditCategoryModal';
 import Loader from './Loader';
 
 export default class OwnerMenuList extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      category: null,
-    };
-  }
-
   getCategory() {
     return FlowRouter.getParam('category');
   }
@@ -68,8 +60,6 @@ export default class OwnerMenuList extends React.Component {
 
               {this.getCategories()}
             </div>
-
-            <OwnerEditCategoryModal category={this.getCategory()}/>
           </div>
 
           <div className="col s12 m12 l8">
